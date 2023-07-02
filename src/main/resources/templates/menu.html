@@ -1,0 +1,31 @@
+<html lang="ru" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <!-- CSS only -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+  <div th:fragment="menu(active)">
+          <nav class="navbar navbar-expand-lg navbar-light bg-dark mb-3 justify-content-between">
+              <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav">
+                      <li class="nav-item active">
+                          <a class="nav-link text-light" th:href="@{/}">Главная</a>
+                      </li>
+                      <li class="nav-item active" sec:authorize="isAuthenticated()">
+                          <a class="nav-link text-light" th:href="@{/cart_shop}">Корзина</a>
+                      </li>
+                  </ul>
+              </div>
+              <div class="d-flex flex-row">
+                  <a href="" class="btn btn-outline-light me-2" sec:authorize="isAnonymous()"  th:href="@{/users/registration}">Регистрация</a>
+                  <a href="" class="btn btn-warning" sec:authorize="isAnonymous()" th:href="@{/users/login}">Вход</a>
+                      <form class="nav-item" sec:authorize="isAuthenticated()" th:action="@{/users/logout}" th:method="post">
+                          <input type="submit" value="Выйти" class="btn btn-danger">
+                      </form>
+              </div>
+          </nav>
+  </div>
+</body>
+</html>
